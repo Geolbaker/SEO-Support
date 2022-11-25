@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+
+
+:root {
+  --brand-primary: #17BEBB;
+  --brand-secondary: #2E282A;
+  --brand-alt: #CD5334;
+  --brand-alt-2: #EDB88B;
+}

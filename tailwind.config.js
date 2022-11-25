@@ -5,7 +5,14 @@ module.exports = {
     './src/*.{html,js}'
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        "brand-primary": "var(--brand-primary)",
+        "brand-secondary": "var(--brand-secondary)",
+        "brand-alt": "var(--brand-alt)",
+        "brand-alt-2": "var(--brand-alt-2)"
+      },
+    },
   },
   plugins: [],
 }

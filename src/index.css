@@ -10,4 +10,12 @@
   --brand-secondary: #2E282A;
   --brand-alt: #CD5334;
   --brand-alt-2: #EDB88B;
+
+
+  --colour-palette-1: hsl(0, 100%, 100%);
+  --colour-palette-2: hsl(0, 100%, 100%);
+  --colour-palette-3: hsl(0, 100%, 100%);
+  --colour-palette-4: hsl(0, 100%, 100%);
+  --colour-palette-5: hsl(0, 100%, 100%);
+
 }

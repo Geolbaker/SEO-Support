@@ -39,11 +39,13 @@ function ColourPalette() {
   $(window).keypress(function(e) {
     if (e.which === 32) {
       colourPalette();
-      textValidation();
     }
   });
 
   function colourPalette(){
+    
+    textValidation();
+
     var variance;
     var HSLValue;
     var randomIntValue1 = 20;

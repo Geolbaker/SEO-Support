@@ -20,6 +20,11 @@ function ColourPalette() {
       }
       //use temp array values to run through the hsl to hex convertor
       var hexValue = hslToHex(tempArray[0].replace(/\D/g,''), tempArray[1].replace(/\D/g,''), tempArray[2].replace(/\D/g,''))
+      console.log(colourValues)
+      console.log(tempArray)
+      console.log(tempArray[0].replace(/\D/g,''));
+      console.log(tempArray[1].replace(/\D/g,''));
+      console.log(tempArray[2].replace(/\D/g,''));
       //print relevant hex colour to each section
       $('#colour-'+i).html(hexValue)
     }

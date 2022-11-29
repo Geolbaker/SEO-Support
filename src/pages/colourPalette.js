@@ -3,17 +3,37 @@ import $ from 'jquery';
 function ColourPalette() {
 
   function textValidation() {
+    //initiate array
     var colourValues = [];
     for (var i = 1; i < 6; i++) {
+      //get the hsl value from css
       colourValues[i] = document.documentElement.style.getPropertyValue('--colour-palette-'+i);
+      //create a temp array to store the segments
       var tempArray = colourValues[i].split(",", 3);
+      //break each segment down into its pure numerical value
       colourValues[i] = tempArray[2].replace(/\D/g,'');
+      //check what the contrast of the colour is, set text color accordingly
       if (colourValues[i] < 50) {
         $('#colour-'+i)[0].style.color = "white";
       } else {
         $('#colour-'+i)[0].style.color = "black";
       }
+      //use temp array values to run through the hsl to hex convertor
+      var hexValue = hslToHex(tempArray[0].replace(/\D/g,''), tempArray[1].replace(/\D/g,''), tempArray[2].replace(/\D/g,''))
+      //print relevant hex colour to each section
+      $('#colour-'+i).html(hexValue)
     }
+  }
+
+  function hslToHex(h, s, l) {
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
   }
 
   $(window).keypress(function(e) {

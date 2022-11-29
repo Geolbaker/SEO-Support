@@ -7,7 +7,7 @@ function ColourPalette() {
     var colourValues = [];
     for (var i = 1; i < 6; i++) {
       //get the hsl value from css
-      colourValues[i] = getComputedStyle( document.documentElement ).getPropertyValue('--colour-palette-'+i);
+      colourValues[i] = getComputedStyle(document.documentElement).getPropertyValue('--colour-palette-'+i);
       //create a temp array to store the segments
       var tempArray = colourValues[i].split(",", 3);
       //break each segment down into its pure numerical value

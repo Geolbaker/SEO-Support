@@ -1,4 +1,5 @@
 import './App.css';
+import './index.css';
 
 import Homepage from './pages/homepage.js';
 import ColourPalette from './pages/colourPalette.js';

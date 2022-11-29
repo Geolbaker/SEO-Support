@@ -2,9 +2,24 @@ import $ from 'jquery';
 
 function ColourPalette() {
 
+  function textValidation() {
+    var colourValues = [];
+    for (var i = 1; i < 6; i++) {
+      colourValues[i] = document.documentElement.style.getPropertyValue('--colour-palette-'+i);
+      var tempArray = colourValues[i].split(",", 3);
+      colourValues[i] = tempArray[2].replace(/\D/g,'');
+      if (colourValues[i] < 50) {
+        $('#colour-'+i)[0].style.color = "white";
+      } else {
+        $('#colour-'+i)[0].style.color = "black";
+      }
+    }
+  }
+
   $(window).keypress(function(e) {
     if (e.which === 32) {
       colourPalette();
+      textValidation();
     }
   });
 
@@ -13,6 +28,9 @@ function ColourPalette() {
     var HSLValue;
     var randomIntValue1 = 20;
     var randomIntValue2 = 80;
+    var firstColourValues = [];
+    var secondColourValues = [];
+    var thirdColourValues = [];
 
     //initial random hsl colour
     var firstMainValue = getRandomInt(0, 360);
@@ -22,61 +40,27 @@ function ColourPalette() {
     HSLValue = 'hsl(' + firstMainValue + ',' + secondMainValue + '%,' + thirdMainValue+ '%)';
     document.documentElement.style.setProperty('--colour-palette-1', HSLValue );
 
-    //setting secondary colour
-    var firstSecondaryValue;
-    //get variance
-    getRandomVariance();
-    firstSecondaryValue = firstMainValue + variance;
-    firstSecondaryValue = colourValidation(firstSecondaryValue);
-    //getting other two hsl values
-    var secondSecondaryValue = getRandomInt(randomIntValue1, randomIntValue2);
-    var thirdSecondaryValue = thirdMainValue + variance;
-    thirdSecondaryValue = colourValidation(thirdSecondaryValue);
-    //setting the secondary colour
-    HSLValue = 'hsl(' + firstSecondaryValue + ',' + secondSecondaryValue + '%,' + thirdSecondaryValue+ '%)';
-    document.documentElement.style.setProperty('--colour-palette-2', HSLValue );
+    //setting original colour value as part of the array of colours
+    firstColourValues[0] = firstMainValue;
+    secondColourValues[0] = secondMainValue;
+    thirdColourValues[0] = thirdMainValue;
 
-    //setting tertiary colour
-    var firstTertiaryValue;
-    //get variance
-    getRandomVariance();
-    firstTertiaryValue = firstSecondaryValue + variance;
-    firstTertiaryValue = colourValidation(firstTertiaryValue);
-    //getting other two hsl values
-    var secondTertiaryValue = getRandomInt(randomIntValue1, randomIntValue2);
-    var thirdTertiaryValue = thirdMainValue + variance;
-    thirdTertiaryValue = colourValidation(thirdTertiaryValue);
-    //setting the secondary colour
-    HSLValue = 'hsl(' + firstTertiaryValue + ',' + secondTertiaryValue + '%,' + thirdTertiaryValue+ '%)';
-    document.documentElement.style.setProperty('--colour-palette-3', HSLValue );
 
-    //setting quaternary colour
-    var firstQuaternaryValue;
-    //get variance
-    getRandomVariance();
-    firstQuaternaryValue = firstTertiaryValue + variance;
-    firstQuaternaryValue = colourValidation(firstQuaternaryValue);
-    //getting other two hsl values
-    var secondQuaternaryValue = getRandomInt(randomIntValue1, randomIntValue2);
-    var thirdQuaternaryValue = thirdMainValue + variance;
-    thirdQuaternaryValue = colourValidation(thirdQuaternaryValue);
-    //setting the secondary colour
-    HSLValue = 'hsl(' + firstQuaternaryValue + ',' + secondQuaternaryValue + '%,' + thirdQuaternaryValue+ '%)';
-    document.documentElement.style.setProperty('--colour-palette-4', HSLValue );
+    for (var i = 1; i < 5; i++ ) {
+      //getting variance
+      getRandomVariance();
+      //setting colour
+      firstColourValues[i] = firstColourValues[i - 1] + variance;
+      firstColourValues[i] = colourValidation(firstColourValues[i]);
+      //getting other two hsl values
+      secondColourValues[i] = getRandomInt(randomIntValue1, randomIntValue2);
+      thirdColourValues[i] = thirdColourValues[i - 1] + variance;
+      thirdColourValues[i] = colourValidation(thirdColourValues[i]);
+      //setting the colour on the page
+      HSLValue = 'hsl(' + firstColourValues[i] + ',' + secondColourValues[i] + '%,' + thirdColourValues[i] + '%)';
+      document.documentElement.style.setProperty('--colour-palette-'+[i+1], HSLValue );
 
-    //setting quinary colour
-    var firstQuinaryValue;
-    //get variance
-    getRandomVariance();
-    firstQuinaryValue = firstQuaternaryValue + variance;
-    firstQuinaryValue = colourValidation(firstQuinaryValue);
-    //getting other two hsl values
-    var secondQuinaryValue = getRandomInt(randomIntValue1, randomIntValue2);
-    var thirdQuinaryValue = thirdMainValue + variance;
-    thirdQuinaryValue = colourValidation(thirdQuinaryValue);
-    //setting the secondary colour
-    HSLValue = 'hsl(' + firstQuinaryValue + ',' + secondQuinaryValue + '%,' + thirdQuinaryValue+ '%)';
-    document.documentElement.style.setProperty('--colour-palette-5', HSLValue );
+    }
 
 
     function getRandomVariance() {
@@ -112,11 +96,11 @@ function ColourPalette() {
           To
         </div>
 
-        <div id="colour-4" className="flex basis-full sm:basis-1/5 justify-center items-center bg-palette-4">
+        <div id="colour-4" className="flex basis-full sm:basis-1/5 justify-center items-center bg-palette-4" style={{color: "white"}}>
           Get
         </div>
 
-        <div id="colour-5" className="flex basis-full sm:basis-1/5 justify-center items-center bg-palette-5">
+        <div id="colour-5" className="flex basis-full sm:basis-1/5 justify-center items-center bg-palette-5" style={{color: "white"}}>
           Going
         </div>
 

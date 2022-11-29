@@ -49,8 +49,6 @@ function ColourPalette() {
   });
 
   function colourPalette(){
-    
-    textValidation();
 
     var variance;
     var HSLValue;
@@ -87,6 +85,10 @@ function ColourPalette() {
       //setting the colour on the page
       HSLValue = 'hsl(' + firstColourValues[i] + ',' + secondColourValues[i] + '%,' + thirdColourValues[i] + '%)';
       document.documentElement.style.setProperty('--colour-palette-'+[i+1], HSLValue );
+      
+      
+      //update the text to the new values
+      textValidation();
 
     }
 

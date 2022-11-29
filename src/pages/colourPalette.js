@@ -8,7 +8,6 @@ function ColourPalette() {
     for (var i = 1; i < 6; i++) {
       //get the hsl value from css
       colourValues[i] = getComputedStyle(document.documentElement).getPropertyValue('--colour-palette-'+i);
-      console.log(colourValues);
       //create a temp array to store the segments
       var tempArray = colourValues[i].split(",", 3);
       //break each segment down into its pure numerical value
@@ -21,11 +20,6 @@ function ColourPalette() {
       }
       //use temp array values to run through the hsl to hex convertor
       var hexValue = hslToHex(tempArray[0].replace(/\D/g,''), tempArray[1].replace(/\D/g,''), tempArray[2].replace(/\D/g,''))
-      console.log(colourValues)
-      console.log(tempArray)
-      console.log(tempArray[0].replace(/\D/g,''));
-      console.log(tempArray[1].replace(/\D/g,''));
-      console.log(tempArray[2].replace(/\D/g,''));
       //print relevant hex colour to each section
       $('#colour-'+i).html(hexValue)
     }

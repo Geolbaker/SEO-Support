@@ -7,7 +7,7 @@ function ColourPalette() {
     var colourValues = [];
     for (var i = 1; i < 6; i++) {
       //get the hsl value from css
-      colourValues[i] = window.getComputedStyle( document.documentElement ).getPropertyValue('--colour-palette-'+i);
+      colourValues[i] = getComputedStyle(document.documentElement).getPropertyValue('--colour-palette-'+i);
       //create a temp array to store the segments
       var tempArray = colourValues[i].split(",", 3);
       //break each segment down into its pure numerical value
@@ -44,8 +44,6 @@ function ColourPalette() {
 
   function colourPalette(){
 
-    textValidation();
-
     var variance;
     var HSLValue;
     var randomIntValue1 = 20;
@@ -81,6 +79,10 @@ function ColourPalette() {
       //setting the colour on the page
       HSLValue = 'hsl(' + firstColourValues[i] + ',' + secondColourValues[i] + '%,' + thirdColourValues[i] + '%)';
       document.documentElement.style.setProperty('--colour-palette-'+[i+1], HSLValue );
+      
+      
+      //update the text to the new values
+      textValidation();
 
     }
 

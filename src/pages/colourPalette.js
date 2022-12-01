@@ -43,7 +43,7 @@ function ColourPalette() {
   });
 
   function colourPalette(){
-    
+
     textValidation();
 
     var variance;
